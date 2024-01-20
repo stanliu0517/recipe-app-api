@@ -1,5 +1,5 @@
 """
-URL mapping for the recipe app.
+URL mappings for the recipe app.
 """
 from django.urls import (
     path,
@@ -16,6 +16,6 @@ router.register('recipes', views.RecipeViewSet)
 
 app_name = 'recipe'
 
-url_patterns = [
+urlpatterns = [
     path('', include(router.urls)),
 ]
