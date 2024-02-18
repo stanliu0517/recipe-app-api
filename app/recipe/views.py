@@ -27,7 +27,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         return self.queryset.filter(user=self.request.user).order_by('-id')
 
     def get_serializer_class(self):
-        """Returen the serializer class for request."""
+        """Return the serializer class for request."""
         if self.action == 'list':
             return serializers.RecipeSerializer
 
@@ -49,5 +49,5 @@ class TagViewSet(mixins.DestroyModelMixin,
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        """Filter querset to authenticated user."""
+        """Filter queryset to authenticated user."""
         return self.queryset.filter(user=self.request.user).order_by('-name')
