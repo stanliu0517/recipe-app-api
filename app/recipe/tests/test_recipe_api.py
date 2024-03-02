@@ -294,7 +294,7 @@ class PrivateRecipeApiTests(TestCase):
         self.assertEqual(recipe.tags.count(), 0)
 
     def test_create_recipe_with_new_ingredients(self):
-        """Test creating a recipe with new ingrediens."""
+        """Test creating a recipe with new ingredients."""
         payload = {
             'title': 'Cauliflower Tacos',
             'time_minutes': 60,
@@ -366,7 +366,7 @@ class PrivateRecipeApiTests(TestCase):
         self.assertIn(ingredient2, recipe.ingredients.all())
         self.assertNotIn(ingredient1, recipe.ingredients.all())
 
-    def test_clear_recipe_ingredient(self):
+    def test_clear_recipe_ingredients(self):
         """Test clearing a recipes ingredients."""
         ingredient = Ingredient.objects.create(user=self.user, name='Garlic')
         recipe = create_recipe(user=self.user)
@@ -384,7 +384,7 @@ class PrivateRecipeApiTests(TestCase):
         r1 = create_recipe(user=self.user, title='Thai Vegetable Curry')
         r2 = create_recipe(user=self.user, title='Aubergine with Tahini')
         tag1 = Tag.objects.create(user=self.user, name='Vegan')
-        tag2 = Tag.objects.create(user=self.user, name='Veganrarian')
+        tag2 = Tag.objects.create(user=self.user, name='Vegetarian')
         r1.tags.add(tag1)
         r2.tags.add(tag2)
         r3 = create_recipe(user=self.user, title='Fish and chips')
@@ -451,7 +451,7 @@ class ImageUploadTests(TestCase):
         self.assertTrue(os.path.exists(self.recipe.image.path))
 
     def test_upload_image_bad_request(self):
-        """Test uploading invalid image."""
+        """Test uploading an invalid image."""
         url = image_upload_url(self.recipe.id)
         payload = {'image': 'notanimage'}
         res = self.client.post(url, payload, format='multipart')

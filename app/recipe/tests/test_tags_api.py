@@ -101,7 +101,7 @@ class PrivateTagsApiTests(TestCase):
         self.assertFalse(tags.exists())
 
     def test_filter_tags_assigned_to_recipes(self):
-        """Test listing tags by those assigned to recipes."""
+        """Test listing tags to those assigned to recipes."""
         tag1 = Tag.objects.create(user=self.user, name='Breakfast')
         tag2 = Tag.objects.create(user=self.user, name='Lunch')
         recipe = Recipe.objects.create(
@@ -112,7 +112,7 @@ class PrivateTagsApiTests(TestCase):
         )
         recipe.tags.add(tag1)
 
-        res = self.client.get(TAGS_URL, {'assigned_on': 1})
+        res = self.client.get(TAGS_URL, {'assigned_only': 1})
 
         s1 = TagSerializer(tag1)
         s2 = TagSerializer(tag2)
