@@ -102,15 +102,15 @@ class PrivateTagsApiTests(TestCase):
 
     def test_filter_tags_assigned_to_recipes(self):
         """Test listing tags by those assigned to recipes."""
-        tag1 = Ingredient.objects.create(user=self.user, name='Breakfast')
-        tag2 = Ingredient.objects.create(user=self.user, name='Lunch')
+        tag1 = Tag.objects.create(user=self.user, name='Breakfast')
+        tag2 = Tag.objects.create(user=self.user, name='Lunch')
         recipe = Recipe.objects.create(
             title='Green Eggs on Toast',
             time_minutes=10,
             price=Decimal('2.50'),
             user=self.user,
         )
-        recipe.tag.add(tag1)
+        recipe.tags.add(tag1)
 
         res = self.client.get(TAGS_URL, {'assigned_on': 1})
 
