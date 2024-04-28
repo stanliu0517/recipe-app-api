@@ -1,8 +1,8 @@
 FROM nginxinc/nginx-unprivileged:1-alpine
 LABEL maintainer="youdomain.com"
 
-COPY ./default.conf.tpl /etc/nginx/default.config.tpl
-COPY ./uwsgi_params /etc/niginx/uwsgi_params
+COPY ./default.conf.tpl /etc/nginx/default.conf.tpl
+COPY ./uwsgi_params /etc/nginx/uwsgi_params
 COPY ./run.sh /run.sh
 
 ENV LISTEN_PORT=8000
@@ -14,6 +14,7 @@ USER root
 RUN mkdir -p /vol/static && \
     chmod 755 /vol/static && \
     touch /etc/nginx/conf.d/default.conf && \
+    chown nginx:nginx /etc/nginx/conf.d/default.conf && \
     chmod +x /run.sh
 
 VOLUME /vol/static
