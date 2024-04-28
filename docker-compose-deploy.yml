@@ -30,15 +30,14 @@ services:
   proxy:
     build:
       context: ./proxy
-      restart: always
-      depends_on:
-        - app
-      ports:
-        - 8000:8000
-      volumes:
-        - static-data:/vol/static
+    restart: always
+    depends_on:
+      - app
+    ports:
+      - 8000:8000
+    volumes:
+      - static-data:/vol/static
 
-  volumes:
-    postgres-data:
-    static-data:
-
+volumes:
+  postgres-data:
+  static-data:
